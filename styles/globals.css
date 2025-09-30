@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base tokens */
+:root {
+  --bg: 255 255 255;
+  --fg: 15 23 42;      /* slate-900 */
+  --muted: 100 116 139;
+  --brand: 6 182 212;  /* cyan-500 */
+  --brand-600: 8 145 178;
+  --surface: 255 255 255;
+  --border: 226 232 240; /* slate-200 */
+}
+
+/* Themes */
+html[data-theme="sunny"] {
+  --bg: 255 255 255;
+  --fg: 15 23 42;
+  --brand: 245 158 11;   /* amber-500 */
+  --brand-600: 217 119 6;/* amber-600 */
+  --surface: 255 255 255;
+  --border: 226 232 240;
+}
+html[data-theme="coral"] {
+  --bg: 255 255 255;
+  --fg: 15 23 42;
+  --brand: 249 115 22;   /* orange-500 */
+  --brand-600: 234 88 12;
+  --surface: 255 255 255;
+  --border: 226 232 240;
+}
+html[data-theme="dusk"] {
+  --bg: 248 250 252;     /* slate-50 */
+  --fg: 15 23 42;
+  --brand: 79 70 229;    /* indigo-600 */
+  --brand-600: 67 56 202;
+  --surface: 255 255 255;
+  --border: 226 232 240;
+}
+html[data-theme="palm"] {
+  --bg: 255 255 255;
+  --fg: 15 23 42;
+  --brand: 16 185 129;   /* emerald-500 */
+  --brand-600: 5 150 105;
+  --surface: 255 255 255;
+  --border: 226 232 240;
+}
+html[data-theme="midnight"] {
+  --bg: 2 6 23;          /* slate-950 */
+  --fg: 226 232 240;     /* slate-200 */
+  --brand: 6 182 212;    /* cyan-500 */
+  --brand-600: 8 145 178;
+  --surface: 15 23 42;   /* slate-900 */
+  --border: 51 65 85;    /* slate-700 */
+}
+
+html, body { height: 100%; }
+body {
+  color: rgb(var(--fg));
+  background: rgb(var(--bg));
+  scrollbar-gutter: stable;
+}
+
+.btn-brand {
+  @apply rounded-lg px-4 py-3 font-semibold text-white shadow transition;
+  background: rgb(var(--brand));
+}
+.btn-brand:hover { background: rgb(var(--brand-600)); }
+
+.card-surface {
+  background: rgb(var(--surface));
+  border-color: rgb(var(--border));
+}
+
+.muted { color: rgb(var(--muted)); }
+
+.text-gradient {
+  background: linear-gradient(90deg, rgb(var(--brand)), #22d3ee, #67e8f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* Advanced UI helpers */
+.noise {
+  background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute; inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from 180deg at 50% 50%, rgba(255,255,255,.6), rgba(var(--brand), .6), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  padding: 1px;
+  pointer-events: none;
+}
+.fade-edges {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+/* Container Query base */
+.cq { container-type: inline-size; }
+
+.shadow-soft{ box-shadow: 0 10px 30px -12px rgba(0,0,0,.25); }
+
+
+/* Hide scrollbar on large screens for snap container */
+@media (min-width: 1024px) {
+  #snap { scrollbar-width: none; }
+  #snap::-webkit-scrollbar { display: none; }
+}
